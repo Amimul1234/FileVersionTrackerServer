@@ -26,7 +26,8 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
     }
 
     @Override
-    public MongoClient mongoClient() {
+    public MongoClient mongoClient()
+    {
         final ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/FileVersioning");
 
         final MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
