@@ -1,7 +1,5 @@
 package com.example.fileServerExperiment.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serializable;
 
 public class Chunk implements Serializable {
@@ -13,7 +11,9 @@ public class Chunk implements Serializable {
     public Chunk() {
     }
 
-    public Chunk( String chunkUUID, int chunkNumber, int versionNumber, String chunkHashValue ) {
+    public Chunk( String chunkUUID, int chunkNumber, int versionNumber,
+                  String chunkHashValue )
+    {
         this.chunkUUID = chunkUUID;
         this.chunkNumber = chunkNumber;
         this.versionNumber = versionNumber;
