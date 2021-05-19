@@ -3,21 +3,19 @@ package com.example.fileServerExperiment.controller;
 import com.example.fileServerExperiment.entity.ChunkTransporter;
 import com.example.fileServerExperiment.entity.FileMetaData;
 import com.example.fileServerExperiment.service.FileMetaDataService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 @RestController
 @RequestMapping("/v1/fileVersion")
 public class FileVersionRequestController {
 
     private final FileMetaDataService fileMetaDataService;
+    private int i;
 
     public FileVersionRequestController( FileMetaDataService fileMetaDataService ) {
         this.fileMetaDataService = fileMetaDataService;
@@ -36,17 +34,14 @@ public class FileVersionRequestController {
     }
 
     @PostMapping("/fileChunkReceiver")
-    public ResponseEntity<String> saveFileChunk( @RequestBody ChunkTransporter chunkTransporter )
+    public void saveFileChunk( @RequestBody ChunkTransporter chunkTransporter)
     {
-
-        try (OutputStream outputStream =
-                     new FileOutputStream("FileChunks/" + chunkTransporter.getHashedName()))
+        i++;
+        try (FileOutputStream fos = new FileOutputStream("C:/Users/Amimul/Desktop/FileChunks/" + i))
         {
-            outputStream.write(chunkTransporter.getChunk());
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            fos.write(chunkTransporter.getChunk());
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(null);
         }
     }
 }
