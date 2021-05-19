@@ -30,8 +30,8 @@ public class FileVersionRequestController {
             fileMetaDataService.saveFileMetaData(fileMetaData);
         }catch (Exception e)
         {
-            e.printStackTrace();
             //need to add chunk deleting mechanism
+            e.printStackTrace();
         }
     }
 
